@@ -13,7 +13,10 @@
   --font-display: "Instrument Serif", serif;
 }
 
-html { scroll-behavior: smooth; background: hsl(var(--bg)); }
+html { background: hsl(var(--bg)); }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
 body { @apply bg-bg text-text-primary font-body antialiased; margin: 0; overflow-x: hidden; }
 ::selection { background: #4e85bf; color: #fff; }
 :focus-visible { outline: 2px solid #89aacc; outline-offset: 3px; }
@@ -29,6 +32,5 @@ body { @apply bg-bg text-text-primary font-body antialiased; margin: 0; overflow
 .pulse-dot { animation: pulse-dot 2s infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

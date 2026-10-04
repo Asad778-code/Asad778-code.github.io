@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { HLS_SRC } from "../data";
 
-export const scrollToId = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+export { scrollToId } from "../smooth";
 
 type BtnProps = { children: ReactNode; href?: string; onClick?: () => void; variant?: "solid" | "outline"; external?: boolean; className?: string };
 

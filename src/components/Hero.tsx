@@ -82,10 +82,9 @@ export default function Hero({ ready }: { ready: boolean }) {
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent" aria-hidden />
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-28">
-        <p className="blur-in opacity-0 text-xs text-muted uppercase tracking-[0.3em] mb-8">Portfolio '26</p>
         <h1 className="name-reveal opacity-0 text-6xl md:text-8xl lg:text-9xl font-display italic leading-[0.9] tracking-tight text-text-primary mb-6">Asad Ali</h1>
         <p className="blur-in opacity-0 text-base md:text-xl text-muted mb-5">
-          A <span key={role} className="font-display italic text-text-primary animate-role-fade-in inline-block">{ROLES[role]}</span> based in Rawalpindi.
+          <span key={role} className="font-display italic text-text-primary animate-role-fade-in inline-block">{ROLES[role]}</span>
         </p>
         <p className="blur-in opacity-0 text-sm md:text-base text-muted max-w-md mb-12">
           I build websites in Framer, Webflow and WordPress, and test every page before it reaches you.
