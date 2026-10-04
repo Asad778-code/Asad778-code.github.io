@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, animate, motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { GALLERY, LINKS, PROJECTS, SERVICES, STATS } from "../data";
+import { GALLERY, LINKS, PORTRAIT, PROJECTS, SERVICES, STATS } from "../data";
 import { Arrow, BgVideo, GradientButton, SectionHeader, scrollToId } from "./ui";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -96,6 +96,64 @@ export function Services() {
             </motion.button>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- About */
+export function About() {
+  return (
+    <section id="about" className="bg-bg py-16 md:py-24 scroll-mt-24">
+      <div className={`${wrap} grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14 items-center`}>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="md:col-span-5"
+        >
+          <div className="group relative mx-auto max-w-[380px] md:max-w-none">
+            <span className="absolute -inset-[2px] rounded-[26px] accent-gradient-animated opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-stroke bg-surface">
+              <img src={PORTRAIT} alt="Portrait of Asad Ali" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <span className="absolute inset-0 halftone opacity-10 mix-blend-multiply" aria-hidden />
+              <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
+              <span className="absolute left-5 bottom-5 inline-flex items-center gap-2 rounded-full bg-bg/70 backdrop-blur-md border border-white/10 px-4 py-2 text-xs">
+                <span className="w-2 h-2 rounded-full bg-green-400 pulse-dot" aria-hidden />
+                Available for projects
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease, delay: 0.12 }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="md:col-span-7"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <span className="w-8 h-px bg-stroke" />
+            <span className="text-xs text-muted uppercase tracking-[0.3em]">About</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-6">
+            A developer who thinks like a <span className="font-display italic">tester</span>
+          </h2>
+          <p className="text-lg md:text-xl text-text-primary/90 mb-5 max-w-xl">
+            Most website problems are found by the client after launch. I'd rather find them first.
+          </p>
+          <p className="text-sm md:text-base text-muted mb-8 max-w-xl">
+            I'm Asad. I build in Framer, Webflow and WordPress, and QA testing is part of my daily work. So every site I hand over has been checked page by page: links, forms, screen sizes and speed. You also get a short note on how to update it yourself.
+          </p>
+          <div className="flex flex-wrap gap-2 mb-9">
+            {["Framer", "Webflow", "WordPress", "Elementor", "Figma", "QA testing"].map((t) => (
+              <span key={t} className="rounded-full border border-stroke bg-surface/40 px-4 py-1.5 text-xs text-muted">{t}</span>
+            ))}
+          </div>
+          <GradientButton onClick={() => scrollToId("contact")}>Work with me <Arrow /></GradientButton>
+        </motion.div>
       </div>
     </section>
   );

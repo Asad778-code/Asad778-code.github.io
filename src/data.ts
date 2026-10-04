@@ -7,6 +7,8 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/asad-ali-3b2017327/",
 };
 
+export const PORTRAIT = `${B}img/asad.webp`;
+
 export const HLS_SRC = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
 
 export const ROLES = ["Framer developer", "Webflow developer", "WordPress developer", "QA tester"];

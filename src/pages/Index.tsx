@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import LoadingScreen from "../components/LoadingScreen";
 import Hero, { Navbar } from "../components/Hero";
-import { Contact, Explorations, Services, Stats, Works } from "../components/Sections";
+import { About, Contact, Explorations, Services, Stats, Works } from "../components/Sections";
 import { pauseScroll, startSmoothScroll } from "../smooth";
 
 export default function Index() {
@@ -18,6 +18,7 @@ export default function Index() {
         <Hero ready={!isLoading} />
         <Works />
         <Services />
+        <About />
         <Explorations />
         <Stats />
       </main>
