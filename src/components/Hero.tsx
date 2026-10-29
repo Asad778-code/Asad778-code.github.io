@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ROLES } from "../data";
+import { LINKS, ROLES } from "../data";
 import { BgVideo, GradientButton, scrollToId } from "./ui";
 
 const NAV = [
@@ -92,6 +92,7 @@ export default function Hero({ ready }: { ready: boolean }) {
         <div className="blur-in opacity-0 inline-flex flex-wrap justify-center gap-4">
           <GradientButton variant="solid" onClick={() => scrollToId("work")}>See works</GradientButton>
           <GradientButton onClick={() => scrollToId("contact")}>Reach out...</GradientButton>
+          <GradientButton href={LINKS.cv} external>Download CV</GradientButton>
         </div>
       </div>
 

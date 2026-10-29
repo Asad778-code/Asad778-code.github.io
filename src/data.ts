@@ -5,6 +5,7 @@ export const LINKS = {
   upwork: "https://www.upwork.com/freelancers/~01cf6ad1c26268d695",
   fiverr: "https://www.fiverr.com/asadali289",
   linkedin: "https://www.linkedin.com/in/asad-ali-3b2017327/",
+  cv: `${B}Asad-Ali-CV.pdf`,
 };
 
 export const PORTRAIT = `${B}img/asad.webp`;

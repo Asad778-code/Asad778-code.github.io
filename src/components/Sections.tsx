@@ -313,6 +313,7 @@ export function Contact() {
             <GradientButton variant="solid" href={`mailto:${LINKS.email}?subject=${encodeURIComponent("Project enquiry")}`}>Contact <Arrow /></GradientButton>
             <GradientButton href={LINKS.upwork} external>Hire me on Upwork <Arrow /></GradientButton>
             <GradientButton href={LINKS.linkedin} external>Message on LinkedIn <Arrow /></GradientButton>
+            <GradientButton href={LINKS.cv} external>Download CV <Arrow /></GradientButton>
           </div>
 
           <div className="w-full flex flex-col md:flex-row items-center justify-between gap-5 border-t border-white/10 pt-6 text-sm text-muted">
@@ -322,6 +323,7 @@ export function Contact() {
               <a className="hover:text-text-primary transition-colors" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a className="hover:text-text-primary transition-colors" href={LINKS.upwork} target="_blank" rel="noopener noreferrer">Upwork</a>
               <a className="hover:text-text-primary transition-colors" href={LINKS.fiverr} target="_blank" rel="noopener noreferrer">Fiverr</a>
+              <a className="hover:text-text-primary transition-colors" href={LINKS.cv} target="_blank" rel="noopener noreferrer">CV</a>
             </nav>
             <span className="inline-flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 pulse-dot" aria-hidden />
