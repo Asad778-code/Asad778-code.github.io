@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, animate, motion, useInView } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { GALLERY, LINKS, PORTRAIT, PROJECTS, SERVICES, STATS } from "../data";
-import { Arrow, BgVideo, GradientButton, SectionHeader, scrollToId } from "./ui";
+import { CAPABILITIES, GALLERY, LINKS, PORTRAIT, PROJECTS, STATS } from "../data";
+import { Arrow, GradientButton, SectionHeader, scrollToId } from "./ui";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,18 +12,47 @@ const ease = [0.25, 0.1, 0.25, 1] as const;
 
 /* ---------------------------------------------------------------- Works */
 export function Works() {
+  const [featured, ...rest] = PROJECTS;
   return (
-    <section id="work" className="bg-bg py-12 md:py-16 scroll-mt-24">
+    <section id="work" className="bg-bg py-16 md:py-24 scroll-mt-24">
       <div className={wrap}>
         <SectionHeader
           eyebrow="Selected Work"
           title="Featured"
           italic="projects"
-          sub="Four sites I built from the first page to launch."
+          sub="Six client sites, each built from the first page to launch."
           action={<GradientButton href={LINKS.upwork} external>View my Upwork <Arrow /></GradientButton>}
         />
+
+        {/* Latest project — feature band */}
+        <motion.a
+          href={featured.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${featured.title} live site`}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease }}
+          viewport={{ once: true, margin: "-80px" }}
+          className="group grid md:grid-cols-2 gap-0 overflow-hidden rounded-3xl border border-stroke bg-surface mb-6"
+        >
+          <div className="order-2 md:order-1 flex flex-col justify-center p-7 md:p-12">
+            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-accent mb-5">
+              <span className="w-2 h-2 rounded-full bg-accent pulse-dot" aria-hidden /> Latest project
+            </span>
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-display italic leading-[0.95] mb-4">{featured.title}</h3>
+            <p className="text-xs uppercase tracking-[0.25em] text-muted mb-5">{featured.platform} · {featured.year}</p>
+            <p className="text-base md:text-lg text-muted max-w-md mb-7">{featured.summary}</p>
+            <span className="inline-flex items-center gap-2 text-sm font-medium group-hover:text-accent transition-colors">View live site <Arrow /></span>
+          </div>
+          <div className="order-1 md:order-2 relative overflow-hidden aspect-[16/10] md:aspect-auto md:min-h-[360px]">
+            <img src={featured.image} alt={`${featured.title} home page`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
+          </div>
+        </motion.a>
+
+        {/* Bento grid — the rest */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
-          {PROJECTS.map((p, i) => (
+          {rest.map((p, i) => (
             <motion.a
               key={p.title}
               href={p.url}
@@ -32,26 +61,23 @@ export function Works() {
               aria-label={`View ${p.title} live site`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease, delay: (i % 2) * 0.12 }}
+              transition={{ duration: 0.9, ease, delay: (i % 2) * 0.1 }}
               viewport={{ once: true, margin: "-80px" }}
               className={`group relative block overflow-hidden bg-surface border border-stroke rounded-3xl ${p.span} ${p.aspect}`}
             >
               <img src={p.image} alt={`${p.title} home page`} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" />
-              <span className="absolute inset-0 halftone opacity-20 mix-blend-multiply" aria-hidden />
-              <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
-              <span className="absolute left-5 bottom-5 right-5 flex items-end justify-between gap-4 transition-opacity duration-300 group-hover:opacity-0 group-focus-visible:opacity-0">
+              <span className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 to-transparent" aria-hidden />
+              <span className="absolute left-5 bottom-5 right-5 flex items-end justify-between gap-4 transition-opacity duration-300 group-hover:opacity-0">
                 <span>
-                  <span className="block text-xs text-white/70 uppercase tracking-[0.25em] mb-1">{p.platform}</span>
+                  <span className="block text-[11px] text-white/70 uppercase tracking-[0.25em] mb-1">{p.no} · {p.platform} · {p.year}</span>
                   <span className="block text-xl md:text-2xl font-display italic text-white">{p.title}</span>
                 </span>
               </span>
-              <span className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center bg-bg/70 opacity-0 backdrop-blur-lg transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
-                <span className="relative rounded-full p-[2px] accent-gradient-animated">
-                  <span className="block rounded-full bg-white text-black text-sm px-5 py-2.5">
-                    View <span aria-hidden>—</span> <span className="font-display italic">{p.title}</span>
-                  </span>
+              <span className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center bg-bg/90 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span className="rounded-full bg-text-primary text-bg text-sm px-5 py-2.5 group-hover:bg-accent group-hover:text-white transition-colors">
+                  View <span className="font-display italic">{p.title}</span> <span aria-hidden>↗</span>
                 </span>
-                <span className="text-sm text-text-primary/80 max-w-xs">{p.summary}</span>
+                <span className="text-sm text-muted max-w-xs">{p.summary}</span>
               </span>
             </motion.a>
           ))}
@@ -61,39 +87,44 @@ export function Works() {
   );
 }
 
-/* ------------------------------------------------- Services (pill list) */
+/* ------------------------------------------- What I do (numbered blocks) */
 export function Services() {
   return (
     <section id="services" className="bg-bg py-16 md:py-24 scroll-mt-24">
       <div className={wrap}>
         <SectionHeader
-          eyebrow="Services"
-          title="What I"
-          italic="do"
-          sub="Build it, fix it or test it. Pick what you need."
+          eyebrow="What I do"
+          title="How I can"
+          italic="help"
+          sub="Build it, test it or fix it. Pick what you need."
           action={<GradientButton onClick={() => scrollToId("contact")}>Start a project <Arrow /></GradientButton>}
         />
-        <div className="flex flex-col gap-4">
-          {SERVICES.map((s, i) => (
-            <motion.button
-              key={s.title}
-              type="button"
-              onClick={() => scrollToId("contact")}
-              initial={{ opacity: 0, y: 24 }}
+        <div className="border-t border-stroke">
+          {CAPABILITIES.map((c, i) => (
+            <motion.div
+              key={c.no}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease, delay: i * 0.06 }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="group flex w-full items-center gap-4 sm:gap-6 p-4 text-left rounded-[40px] sm:rounded-full bg-surface/30 hover:bg-surface border border-stroke transition-colors duration-300"
+              viewport={{ once: true, margin: "-80px" }}
+              className="grid md:grid-cols-12 gap-5 md:gap-8 py-8 md:py-11 border-b border-stroke"
             >
-              <img src={s.image} alt="" loading="lazy" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover shrink-0 grayscale group-hover:grayscale-0 transition duration-500" />
-              <span className="flex-1 min-w-0">
-                <span className="block text-base sm:text-xl">{s.title}</span>
-                <span className="block text-xs sm:text-sm text-muted truncate">{s.detail}</span>
-              </span>
-              <span className="hidden sm:block text-xs text-muted uppercase tracking-[0.2em]">{s.tag}</span>
-              <span className="hidden md:block text-xs text-muted w-24 text-right">{s.meta}</span>
-              <span className="flex w-10 h-10 shrink-0 items-center justify-center rounded-full border border-stroke text-muted transition-all duration-300 group-hover:text-bg group-hover:bg-text-primary group-hover:-rotate-45" aria-hidden>→</span>
-            </motion.button>
+              <div className="md:col-span-4 flex items-start gap-5">
+                <span className="text-4xl md:text-5xl font-display italic text-accent leading-none">{c.no}</span>
+                <div>
+                  <h3 className="text-2xl md:text-3xl tracking-tight leading-tight">{c.title}</h3>
+                  <p className="text-[11px] uppercase tracking-[0.25em] text-muted mt-2">{c.meta}</p>
+                </div>
+              </div>
+              <ul className="md:col-span-8 flex flex-col gap-3 md:pl-6">
+                {c.points.map((pt) => (
+                  <li key={pt} className="flex gap-3 text-base md:text-lg text-muted">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                    <span><span className="text-text-primary">{pt}</span></span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -114,13 +145,12 @@ export function About() {
           className="md:col-span-5"
         >
           <div className="group relative mx-auto max-w-[380px] md:max-w-none">
-            <span className="absolute -inset-[2px] rounded-[26px] accent-gradient-animated opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden />
+            <span className="absolute -inset-[2px] rounded-[26px] accent-gradient opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden />
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-stroke bg-surface">
               <img src={PORTRAIT} alt="Portrait of Asad Ali" loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <span className="absolute inset-0 halftone opacity-10 mix-blend-multiply" aria-hidden />
-              <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" aria-hidden />
-              <span className="absolute left-5 bottom-5 inline-flex items-center gap-2 rounded-full bg-bg/70 backdrop-blur-md border border-white/10 px-4 py-2 text-xs">
-                <span className="w-2 h-2 rounded-full bg-green-400 pulse-dot" aria-hidden />
+              <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" aria-hidden />
+              <span className="absolute left-5 bottom-5 inline-flex items-center gap-2 rounded-full bg-bg/85 backdrop-blur-md border border-stroke px-4 py-2 text-xs">
+                <span className="w-2 h-2 rounded-full bg-accent pulse-dot" aria-hidden />
                 Available for projects
               </span>
             </div>
@@ -135,24 +165,24 @@ export function About() {
           className="md:col-span-7"
         >
           <div className="flex items-center gap-3 mb-5">
-            <span className="w-8 h-px bg-stroke" />
+            <span className="w-8 h-px bg-text-primary/40" />
             <span className="text-xs text-muted uppercase tracking-[0.3em]">About</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.02] mb-6">
             A developer who thinks like a <span className="font-display italic">tester</span>
           </h2>
-          <p className="text-lg md:text-xl text-text-primary/90 mb-5 max-w-xl">
+          <p className="text-lg md:text-xl mb-5 max-w-xl">
             Most website problems are found by the client after launch. I'd rather find them first.
           </p>
           <p className="text-sm md:text-base text-muted mb-8 max-w-xl">
-            I'm Asad. I build in Framer, Webflow and WordPress, and QA testing is part of my daily work. So every site I hand over has been checked page by page: links, forms, screen sizes and speed. You also get a short note on how to update it yourself.
+            I'm Asad. I build in Framer, Webflow and WordPress, and QA testing is part of my daily work as VConekt's QA Master. So every site I hand over has been checked page by page: links, forms, screen sizes and speed. You also get a short note on how to update it yourself.
           </p>
           <div className="flex flex-wrap gap-2 mb-9">
             {["Framer", "Webflow", "WordPress", "Elementor", "Figma", "QA testing"].map((t) => (
-              <span key={t} className="rounded-full border border-stroke bg-surface/40 px-4 py-1.5 text-xs text-muted">{t}</span>
+              <span key={t} className="rounded-full border border-stroke bg-surface px-4 py-1.5 text-xs text-muted">{t}</span>
             ))}
           </div>
-          <GradientButton onClick={() => scrollToId("contact")}>Work with me <Arrow /></GradientButton>
+          <GradientButton variant="solid" onClick={() => scrollToId("contact")}>Work with me <Arrow /></GradientButton>
         </motion.div>
       </div>
     </section>
@@ -193,7 +223,7 @@ export function Explorations() {
         onClick={() => setOpen(i)}
         aria-label={`Open image: ${g.alt}`}
         style={{ rotate: `${g.rotate}deg` }}
-        className="pointer-events-auto block w-full max-w-[320px] aspect-square overflow-hidden rounded-3xl border border-stroke bg-surface shadow-2xl shadow-black/50 transition-transform duration-500 hover:scale-[1.04] hover:!rotate-0"
+        className="pointer-events-auto block w-full max-w-[320px] aspect-square overflow-hidden rounded-3xl border border-stroke bg-surface shadow-xl shadow-black/10 transition-transform duration-500 hover:scale-[1.04] hover:!rotate-0"
       >
         <img src={g.src} alt={g.alt} loading="lazy" className="w-full h-full object-cover" />
       </button>
@@ -204,11 +234,11 @@ export function Explorations() {
     <section ref={section} className="relative min-h-[300vh] bg-bg overflow-hidden">
       <div ref={content} className="relative z-10 h-screen flex flex-col items-center justify-center text-center px-6">
         <div className="flex items-center gap-3 mb-5">
-          <span className="w-8 h-px bg-stroke" />
+          <span className="w-8 h-px bg-text-primary/40" />
           <span className="text-xs text-muted uppercase tracking-[0.3em]">Explorations</span>
-          <span className="w-8 h-px bg-stroke" />
+          <span className="w-8 h-px bg-text-primary/40" />
         </div>
-        <h2 className="text-5xl md:text-7xl tracking-tight leading-[1.05] mb-5">Inside the <span className="font-display italic">builds</span></h2>
+        <h2 className="text-5xl md:text-7xl tracking-tight leading-[1.02] mb-5">Inside the <span className="font-display italic">builds</span></h2>
         <p className="text-sm md:text-base text-muted max-w-sm mb-8">Inner pages and details from the projects above. Click any image to enlarge it.</p>
         <GradientButton href={LINKS.fiverr} external>See my Fiverr <Arrow /></GradientButton>
       </div>
@@ -230,7 +260,7 @@ export function Explorations() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setOpen(null)}
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/85 backdrop-blur-md p-6 cursor-zoom-out"
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-md p-6 cursor-zoom-out"
           >
             <motion.img
               src={GALLERY[open].src}
@@ -239,9 +269,9 @@ export function Explorations() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ duration: 0.35, ease }}
-              className="max-h-[85vh] max-w-full rounded-2xl border border-stroke"
+              className="max-h-[85vh] max-w-full rounded-2xl border border-white/10"
             />
-            <button type="button" autoFocus onClick={() => setOpen(null)} className="absolute top-6 right-6 text-sm text-muted hover:text-text-primary">Close ✕</button>
+            <button type="button" autoFocus onClick={() => setOpen(null)} className="absolute top-6 right-6 text-sm text-white/70 hover:text-white">Close ✕</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -273,7 +303,7 @@ export function Stats() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease, delay: i * 0.1 }}
             viewport={{ once: true, margin: "-80px" }}
-            className="border-t border-stroke pt-6"
+            className="border-t border-text-primary/20 pt-6"
           >
             <p className="text-7xl md:text-8xl font-display italic leading-none mb-3 tabular-nums"><Counter to={s.value} />{s.suffix}</p>
             <p className="text-sm text-muted">{s.label}</p>
@@ -293,30 +323,27 @@ export function Contact() {
   }, []);
 
   return (
-    <footer id="contact" className="relative z-30 bg-bg pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden">
-      <BgVideo flipped />
-      <div className="absolute inset-0 bg-black/60" aria-hidden />
-      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-bg to-transparent" aria-hidden />
-
+    <footer id="contact" className="relative z-30 bg-surface pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden scroll-mt-24">
+      <span className="absolute inset-0 paper-grain opacity-50" aria-hidden />
       <div className="relative">
-        <div className="overflow-hidden mb-14 md:mb-20" aria-hidden>
-          <div ref={track} className="flex w-max whitespace-nowrap text-6xl md:text-8xl lg:text-9xl font-display italic text-text-primary/90">
-            {Array.from({ length: 10 }, (_, i) => <span key={i} className="pr-8">BUILT. TESTED. SHIPPED. •</span>)}
+        <div className="overflow-hidden mb-14 md:mb-20 border-y border-stroke py-6" aria-hidden>
+          <div ref={track} className="flex w-max whitespace-nowrap text-6xl md:text-8xl lg:text-9xl font-display italic text-text-primary">
+            {Array.from({ length: 10 }, (_, i) => <span key={i} className="pr-8">BUILT. TESTED. SHIPPED. <span className="text-accent">•</span> </span>)}
           </div>
         </div>
 
         <div className={`${wrap} flex flex-col items-center text-center`}>
           <p className="text-xs text-muted uppercase tracking-[0.3em] mb-5">Contact</p>
-          <h2 className="text-4xl md:text-6xl tracking-tight leading-[1.05] mb-5">Have a site to build, fix or <span className="font-display italic">test?</span></h2>
+          <h2 className="text-4xl md:text-6xl tracking-tight leading-[1.02] mb-5">Have a site to build, fix or <span className="font-display italic text-accent">test?</span></h2>
           <p className="text-sm md:text-base text-muted max-w-md mb-10">Send me an email, or message me where you already work. I reply the same day.</p>
           <div className="flex flex-wrap justify-center gap-4 mb-20 md:mb-28">
-            <GradientButton variant="solid" href={`mailto:${LINKS.email}?subject=${encodeURIComponent("Project enquiry")}`}>Contact <Arrow /></GradientButton>
+            <GradientButton variant="solid" href={`mailto:${LINKS.email}?subject=${encodeURIComponent("Project enquiry")}`}>Email me <Arrow /></GradientButton>
             <GradientButton href={LINKS.upwork} external>Hire me on Upwork <Arrow /></GradientButton>
             <GradientButton href={LINKS.linkedin} external>Message on LinkedIn <Arrow /></GradientButton>
             <GradientButton href={LINKS.cv} external>Download CV <Arrow /></GradientButton>
           </div>
 
-          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-5 border-t border-white/10 pt-6 text-sm text-muted">
+          <div className="w-full flex flex-col md:flex-row items-center justify-between gap-5 border-t border-stroke pt-6 text-sm text-muted">
             <span>© {new Date().getFullYear()} Asad Ali</span>
             <nav aria-label="Social" className="flex gap-6">
               <a className="hover:text-text-primary transition-colors" href={`mailto:${LINKS.email}`}>Email</a>
@@ -326,7 +353,7 @@ export function Contact() {
               <a className="hover:text-text-primary transition-colors" href={LINKS.cv} target="_blank" rel="noopener noreferrer">CV</a>
             </nav>
             <span className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-400 pulse-dot" aria-hidden />
+              <span className="w-2 h-2 rounded-full bg-accent pulse-dot" aria-hidden />
               Available for projects
             </span>
           </div>

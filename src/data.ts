@@ -10,24 +10,63 @@ export const LINKS = {
 
 export const PORTRAIT = `${B}img/asad.webp`;
 
-export const HLS_SRC = "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
+export const ROLES = ["Framer", "Webflow", "WordPress", "QA testing"];
 
-export const ROLES = ["Framer developer", "Webflow developer", "WordPress developer", "QA tester"];
-
-export type Project = { title: string; platform: string; summary: string; image: string; url: string; span: string; aspect: string };
+export type Project = {
+  no: string;
+  title: string;
+  platform: string;
+  year: string;
+  summary: string;
+  image: string;
+  url: string;
+  span: string;
+  aspect: string;
+  featured?: boolean;
+};
 
 export const PROJECTS: Project[] = [
-  { title: "Nordic Nexuz", platform: "Framer", summary: "B2B lead generation site with a CMS blog and animated dark design.", image: `${B}img/nordic.webp`, url: "https://nordicnexuz.com/", span: "md:col-span-7", aspect: "aspect-[4/3] md:aspect-[16/11]" },
-  { title: "Diamant Versatile", platform: "Framer", summary: "Collectible furniture catalogue with CMS filters and a page per piece.", image: `${B}img/diamant.webp`, url: "https://diamantversatile.com/", span: "md:col-span-5", aspect: "aspect-[4/3] md:aspect-auto md:h-full" },
-  { title: "Malik Forex Academy", platform: "WordPress", summary: "Online course platform with an LMS, registration and student dashboard.", image: `${B}img/malik.webp`, url: "https://malikfxacdemy.com/", span: "md:col-span-5", aspect: "aspect-[4/3] md:aspect-auto md:h-full" },
-  { title: "Green Flow Solution", platform: "WordPress", summary: "HVAC and electrical services site with a knowledge centre search.", image: `${B}img/greenflow.webp`, url: "https://greenflowsolution.com/", span: "md:col-span-7", aspect: "aspect-[4/3] md:aspect-[16/11]" },
+  { no: "01", title: "Money Days", platform: "WordPress", year: "2026", summary: "Currency-exchange site for a Toronto money changer — live exchange-rate board, two store locations, calculator and compliance pages.", image: `${B}img/moneydays.webp`, url: "https://moneydays.ca/", span: "md:col-span-12", aspect: "aspect-[16/10] md:aspect-[21/9]", featured: true },
+  { no: "02", title: "Aaron Signature", platform: "WordPress", year: "2026", summary: "Toronto gold & jewellery store — live metal prices, WooCommerce shop, repair and private-loan services, multi-store setup.", image: `${B}img/aaronsignature.webp`, url: "https://aaronsignature.com/", span: "md:col-span-7", aspect: "aspect-[4/3] md:aspect-[16/11]" },
+  { no: "03", title: "Nordic Nexuz", platform: "Framer", year: "2025", summary: "B2B lead-generation site with a CMS blog and an animated dark design.", image: `${B}img/nordic.webp`, url: "https://nordicnexuz.com/", span: "md:col-span-5", aspect: "aspect-[4/3] md:aspect-[16/11]" },
+  { no: "04", title: "Diamant Versatile", platform: "Framer", year: "2025", summary: "Collectible-furniture catalogue with CMS filters and a page for every piece.", image: `${B}img/diamant.webp`, url: "https://diamantversatile.com/", span: "md:col-span-5", aspect: "aspect-[4/3] md:aspect-[16/11]" },
+  { no: "05", title: "Malik Forex Academy", platform: "WordPress", year: "2025", summary: "Online trading-course platform with an LMS, registration and a student dashboard.", image: `${B}img/malik.webp`, url: "https://malikfxacdemy.com/", span: "md:col-span-7", aspect: "aspect-[4/3] md:aspect-[16/11]" },
+  { no: "06", title: "Green Flow Solution", platform: "WordPress", year: "2025", summary: "HVAC and electrical services site with a searchable knowledge centre.", image: `${B}img/greenflow.webp`, url: "https://greenflowsolution.com/", span: "md:col-span-12", aspect: "aspect-[16/10] md:aspect-[21/9]" },
 ];
 
-export const SERVICES = [
-  { title: "Framer websites", detail: "Figma to Framer, CMS, animations, SEO settings", tag: "Build", meta: "From 1 page", image: `${B}img/nordic-thumb.webp`, topic: "Framer" },
-  { title: "Webflow builds", detail: "Clean classes, CMS, interactions, every breakpoint", tag: "Build", meta: "From 1 page", image: `${B}img/diamant-thumb.webp`, topic: "Webflow" },
-  { title: "WordPress work", detail: "Elementor, theme changes, bug fixes, LMS setup", tag: "Build / Fix", meta: "From 1 fix", image: `${B}img/malik-thumb.webp`, topic: "WordPress" },
-  { title: "Website QA testing", detail: "Manual tests across browsers, clear bug reports", tag: "Test", meta: "From 5 pages", image: `${B}img/greenflow-thumb.webp`, topic: "QA" },
+export type Capability = { no: string; title: string; meta: string; points: string[] };
+
+export const CAPABILITIES: Capability[] = [
+  {
+    no: "01",
+    title: "Websites, built end to end",
+    meta: "FRAMER · WEBFLOW · WORDPRESS",
+    points: [
+      "From a Figma file or a rough idea to a live site: layout, CMS, animations and SEO settings.",
+      "Built on whichever platform fits — Framer and Webflow for design-led sites, WordPress when it needs a CMS or a shop.",
+      "Checked on every screen size before you ever see it.",
+    ],
+  },
+  {
+    no: "02",
+    title: "QA testing",
+    meta: "MANUAL · CROSS-BROWSER · DAILY",
+    points: [
+      "I test like a user and a tester at once: links, forms, speed and the edge cases people forget.",
+      "You get a clear bug report, ranked by how much each issue actually hurts.",
+      "It's my day job — I'm QA Master at VConekt — not a skill I picked up on the side.",
+    ],
+  },
+  {
+    no: "03",
+    title: "Fixes & handover",
+    meta: "WORDPRESS · SPEED · UPKEEP",
+    points: [
+      "A broken plugin, slow pages, a layout that fell apart after an update — I find the cause and fix it.",
+      "Small changes and ongoing upkeep, without the agency price tag.",
+      "Every handover comes with a short, plain note on how to update the site yourself.",
+    ],
+  },
 ];
 
 export const GALLERY = [
@@ -40,7 +79,7 @@ export const GALLERY = [
 ];
 
 export const STATS = [
-  { value: 4, suffix: "", label: "Sites launched end to end" },
-  { value: 3, suffix: "", label: "Platforms: Framer, Webflow, WordPress" },
-  { value: 8, suffix: "", label: "Checks before every handoff" },
+  { value: 6, suffix: "", label: "Client sites shipped end to end" },
+  { value: 3, suffix: "", label: "Platforms used daily: Framer, Webflow, WordPress" },
+  { value: 100, suffix: "%", label: "Pages tested before every handover" },
 ];

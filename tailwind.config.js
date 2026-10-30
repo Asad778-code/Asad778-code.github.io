@@ -3,13 +3,14 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: { body: ["Inter", "sans-serif"], display: ["Instrument Serif", "serif"] },
+      fontFamily: { body: ["Poppins", "sans-serif"], display: ["Montserrat", "sans-serif"] },
       colors: {
         bg: "hsl(var(--bg))",
         surface: "hsl(var(--surface))",
         "text-primary": "hsl(var(--text))",
         muted: "hsl(var(--muted))",
         stroke: "hsl(var(--stroke))",
+        accent: "hsl(var(--accent))",
       },
       animation: {
         "scroll-down": "scroll-down 1.5s ease-in-out infinite",
